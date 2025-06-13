@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const COUCHDB_URL = process.env.COUCHDB_URL || "http://127.0.0.1:5984";
-const COUCHDB_USERNAME = process.env.COUCHDB_USERNAME || "admin";
-const COUCHDB_PASSWORD = process.env.COUCHDB_PASSWORD || "password";
+const COUCHDB_URL = process.env.COUCHDB_URL as string;
+const COUCHDB_USERNAME = process.env.COUCHDB_USERNAME as string;
+const COUCHDB_PASSWORD = process.env.COUCHDB_PASSWORD as string;
 
 export const couchdb = axios.create({
   baseURL: COUCHDB_URL,

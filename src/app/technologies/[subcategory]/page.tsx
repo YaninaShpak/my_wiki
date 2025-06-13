@@ -1,5 +1,6 @@
 import CategoriesGrid from "@/components/CategoriesGrid";
 import readableTitles from "@/constants/readableTitles";
+import { getCategoriesFromCouch } from "@/lib/getCategoriesFromCouch";
 
 type Props = {
   params: {
@@ -7,25 +8,9 @@ type Props = {
   };
 };
 
-type Section = {
-  label: string;
-  path: string;
-};
-
-const contentBySubcategory: Record<string, Section[] > = {
-  javascript: [
-    { label: 'Функции', path: '/technologies/javascript/functions' },
-    { label: 'Типы данных', path: '/technologies/javascript/types' },
-  ],
-  react: [
-    { label: 'Hooks', path: '/technologies/react/hooks' },
-    { label: 'Components', path: '/technologies/react/components' },
-  ],
-};
-
 export default async function SubcategoryPage({ params }: Props) {
-  const { subcategory } = await params;
-  const subcategories = contentBySubcategory[subcategory];
+  const { subcategory } = params;
+  const subcategories = await getCategoriesFromCouch(subcategory);
   const title = readableTitles[subcategory] || subcategory;
 
   return (
